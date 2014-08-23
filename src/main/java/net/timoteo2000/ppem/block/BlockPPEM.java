@@ -5,6 +5,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.timoteo2000.ppem.creativetab.CreativeTabPPEM;
 import net.timoteo2000.ppem.reference.Reference;
 
@@ -35,5 +37,9 @@ public class BlockPPEM extends Block {
     {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
+
+	public Integer getGui(World world, int x, int y, int z, EntityPlayer entityplayer) {
+		return null;
+	}
 	
 }

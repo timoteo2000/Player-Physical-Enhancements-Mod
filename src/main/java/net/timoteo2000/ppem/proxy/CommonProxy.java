@@ -1,5 +1,7 @@
 package net.timoteo2000.ppem.proxy;
 
+import java.util.HashMap;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.timoteo2000.ppem.client.gui.GuiEnhancementTable;
@@ -7,22 +9,40 @@ import cpw.mods.fml.common.network.IGuiHandler;
 
 public abstract class CommonProxy implements IProxy,IGuiHandler {
 	
+	public static final int enhancementTableGuiID = 100;
+	
 	@Override
 	public void registerKeyBindings() {}
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-		// TODO Auto-generated method stub
-		return null;
+		IGuiHandler handler = serverGuiHandlers.get(ID);
+			if(handler != null)
+				return handler.getServerGuiElement(ID, player, world, x, y, z);
+			return null;
 	}
 
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-		if(ID == GuiEnhancementTable.GUI_ID)
-			return new GuiEnhancementTable();
+		IGuiHandler handler = clientGuiHandlers.get(ID);
+		if(handler != null)
+			return handler.getClientGuiElement(ID, player, world, x, y, z);
 		return null;
 	}
+	
+	private static HashMap<Integer, IGuiHandler> serverGuiHandlers = new HashMap<Integer, IGuiHandler>();
+    private static HashMap<Integer, IGuiHandler> clientGuiHandlers = new HashMap<Integer, IGuiHandler>();
+    
+    public static void registerServerGuiHandler(int gui, IGuiHandler handler)
+    {
+        serverGuiHandlers.put(gui, handler);
+    }
+    
+    public static void registerClientGuiHandler(int gui, IGuiHandler handler)
+    {
+        clientGuiHandlers.put(gui, handler);
+    }
 
 }

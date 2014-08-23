@@ -6,6 +6,7 @@ import net.timoteo2000.ppem.handler.ConfigHandler;
 import net.timoteo2000.ppem.init.ModBlocks;
 import net.timoteo2000.ppem.init.ModItems;
 import net.timoteo2000.ppem.init.Recipes;
+import net.timoteo2000.ppem.proxy.CommonProxy;
 import net.timoteo2000.ppem.proxy.IProxy;
 import net.timoteo2000.ppem.reference.Reference;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -15,6 +16,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid=Reference.MOD_ID,version=Reference.VERSION,guiFactory=Reference.GUI_FACTORY)
 public class PPEMMod {
@@ -26,6 +28,8 @@ public class PPEMMod {
 	
 	@SidedProxy(clientSide=Reference.CLIENT_PROXY,serverSide=Reference.SERVER_PROXY)
 	public static IProxy proxy;
+	
+	public static CommonProxy commonProxy;
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event){
@@ -39,6 +43,8 @@ public class PPEMMod {
 		 Recipes.init();
 		 
 		 proxy.registerKeyBindings();
+		 
+		 NetworkRegistry.INSTANCE.registerGuiHandler(PPEMMod.instance, commonProxy);
 	}
 	
 	@Mod.EventHandler
