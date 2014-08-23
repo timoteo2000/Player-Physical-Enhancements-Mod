@@ -10,9 +10,14 @@ import net.minecraft.world.World;
 import net.timoteo2000.ppem.creativetab.CreativeTabPPEM;
 import net.timoteo2000.ppem.reference.Reference;
 
-public class BlockPPEM extends Block {
+public abstract class BlockPPEM extends Block {
 	public BlockPPEM(Material material){
 		super(material);
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float clickX, float clickY, float clickZ){
+		return false;
 	}
 	
 	public BlockPPEM(){
@@ -38,8 +43,6 @@ public class BlockPPEM extends Block {
         return unlocalizedName.substring(unlocalizedName.indexOf(".") + 1);
     }
 
-	public Integer getGui(World world, int x, int y, int z, EntityPlayer entityplayer) {
-		return null;
-	}
+	public abstract Integer getGui(World world, int x, int y, int z, EntityPlayer entityplayer);
 	
 }

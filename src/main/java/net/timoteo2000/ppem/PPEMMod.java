@@ -1,6 +1,7 @@
 package net.timoteo2000.ppem;
 
 import net.timoteo2000.ppem.client.gui.GuiEnhancementTable;
+import net.timoteo2000.ppem.client.handler.GuiHandler;
 import net.timoteo2000.ppem.client.handler.KeyInputEventHandler;
 import net.timoteo2000.ppem.handler.ConfigHandler;
 import net.timoteo2000.ppem.init.ModBlocks;
@@ -43,13 +44,12 @@ public class PPEMMod {
 		 Recipes.init();
 		 
 		 proxy.registerKeyBindings();
-		 
-		 NetworkRegistry.INSTANCE.registerGuiHandler(PPEMMod.instance, commonProxy);
 	}
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event){
 		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 	}
 	
 	@Mod.EventHandler
