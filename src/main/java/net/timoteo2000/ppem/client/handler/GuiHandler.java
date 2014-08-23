@@ -1,6 +1,7 @@
 package net.timoteo2000.ppem.client.handler;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.world.World;
 import net.timoteo2000.ppem.block.BlockEnhancementTable;
 import net.timoteo2000.ppem.client.gui.GuiEnhancementTable;
@@ -14,9 +15,10 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
+		InventoryPlayer inv = new InventoryPlayer(player);
 		if(ID==0){
 			//return new ContainerEnhancementTable(player);
-			return new GuiEnhancementTable();
+			return new GuiEnhancementTable(inv, world, x, y, z);
 		}
 			return null;
 	}
@@ -24,9 +26,10 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
+		InventoryPlayer inv = new InventoryPlayer(player);
 		if(ID==0){
 			//return new ContainerEnhancementTable(player);
-			return new GuiEnhancementTable();
+			return new GuiEnhancementTable(inv, world, x, y, z);
 		}
 		return null;
 	}
