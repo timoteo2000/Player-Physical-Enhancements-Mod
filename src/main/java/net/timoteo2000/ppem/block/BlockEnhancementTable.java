@@ -18,6 +18,7 @@ import net.timoteo2000.ppem.utils.LogHelper;
 public class BlockEnhancementTable extends BlockContainer {
 	public BlockEnhancementTable(){
 		super(Material.rock);
+		this.setBlockName("enhancementTable");
 	}
 	
 	
@@ -26,9 +27,7 @@ public class BlockEnhancementTable extends BlockContainer {
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float clickX, float clickY, float clickZ){ //This is supposed to open a Gui when the block is rightclicked but im still trying to figure out how this works.
 		LogHelper.info("111111111111111111111111111111");
 		FMLNetworkHandler handler = new FMLNetworkHandler();
-		if(world.isRemote){
-		    handler.openGui(player, getModInstance(), 0, world, x, y, z);
-		}
+		handler.openGui(player, getModInstance(), 0, world, x, y, z);
 		return true;
 		}
 

@@ -17,9 +17,9 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0"
-group= "com.yourname.modid" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "modid"
+version = "A1.0"
+group= "net.timoteo2000.PPEM" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "PPEM"
 
 minecraft {
     version = "1.7.10-10.13.0.1208"

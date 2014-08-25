@@ -1,41 +1,47 @@
 package net.timoteo2000.ppem.inventory;
 
+import java.util.Stack;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.timoteo2000.ppem.block.tileentity.TileEntityEnhancementTable;
+import net.timoteo2000.ppem.item.ItemEnhancementOrb;
 
 public class ContainerEnhancementTable extends Container{
 
 
 	private InventoryBasic inventory;
 	private World world;
+	private TileEntityEnhancementTable table;
 	
 	
-	public ContainerEnhancementTable(InventoryPlayer inv, World world, int x, int y, int z){	
-		this.addSlotToContainer(new Slot(this.tableInventory, 0, 25, 47){
-			public boolean isItemValid(){
-				return true;
-			}
-		});
+	public ContainerEnhancementTable(InventoryPlayer inv, World world, int x, int y, int z){
+		//Top slot
+		/*TODO it seems whenever an item is put in either slot, both slots display it can be picked out of either side, no duplication appears.*/
+		this.addSlotToContainer(new SlotTable1(this.tableInventory, 0, 20, 19));
+		//Bottom slot
+		this.addSlotToContainer(new SlotTable2(this.tableInventory, 0, 20, 50));
 		
 		/*Inventory slots.*/
-		//TODO Figure out how to make the slots from the inventory appear when opening the Enhancement Table
-		for (int i = 0; i < 3; ++i) {
-			for (int j = 0; j < 9; ++j) {
-				addSlotToContainer(new Slot(inv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+		for(int i = 0; i < 3; i++) {
+			  for(int j = 0; j < 9; j++) {
+			    this.addSlotToContainer(new Slot(inv, 9 + j + i * 9, 8 + j * 18, 84 + i * 18));
+			  }
 			}
-		}
 
 		for (int i = 0; i < 9; ++i) {
-			addSlotToContainer(new Slot(inv, i, 8 + i * 18, 142));
+			this.addSlotToContainer(new Slot(inv, i, 8 + i * 18, 142));
 		}
 	}
 	
@@ -59,7 +65,6 @@ public class ContainerEnhancementTable extends Container{
             if (itemstack != null)
             	player.dropPlayerItemWithRandomChoice(itemstack, false);
     }
-	
 	
 	
 	@Override
@@ -118,4 +123,34 @@ public class ContainerEnhancementTable extends Container{
 
         return itemstack;
     }
+}
+
+class SlotTable1 extends Slot{
+
+	public SlotTable1(IInventory inv, int index, int x,
+			int y) {
+		super(inv, index, x, y);
+	}
+	
+	@Override
+	public boolean isItemValid(ItemStack item){
+		return item != null && item.getItem() instanceof ItemEnhancementOrb; 
+	}
+	
+	
+}
+
+class SlotTable2 extends Slot{
+
+	public SlotTable2(IInventory inv, int index, int x,
+			int y) {
+		super(inv, index, x, y);
+	}
+	
+	@Override
+	public boolean isItemValid(ItemStack item){
+		return item != null && item.getItem() instanceof ItemArmor; 
+	}
+	
+	
 }

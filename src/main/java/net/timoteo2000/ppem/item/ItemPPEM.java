@@ -3,10 +3,14 @@ package net.timoteo2000.ppem.item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 import net.timoteo2000.ppem.creativetab.CreativeTabPPEM;
 import net.timoteo2000.ppem.reference.Reference;
+import net.timoteo2000.ppem.utils.LogHelper;
 
 public class ItemPPEM extends Item {
 	public ItemPPEM(){
@@ -32,6 +36,10 @@ public class ItemPPEM extends Item {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister iconReg){
 		itemIcon = iconReg.registerIcon(this.getUnlocalizedName().substring(this.getUnlocalizedName().indexOf(".")+1));
+	}
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player) {
+		return itemstack;
 	}
 	
 }

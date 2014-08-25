@@ -18,7 +18,7 @@ public class GuiHandler implements IGuiHandler {
 		InventoryPlayer inv = new InventoryPlayer(player);
 		if(ID==0){
 			//return new ContainerEnhancementTable(player);
-			return new GuiEnhancementTable(inv, world, x, y, z);
+			return new ContainerEnhancementTable(player.inventory, world, x, y, z);
 		}
 			return null;
 	}
@@ -29,7 +29,7 @@ public class GuiHandler implements IGuiHandler {
 		InventoryPlayer inv = new InventoryPlayer(player);
 		if(ID==0){
 			//return new ContainerEnhancementTable(player);
-			return new GuiEnhancementTable(inv, world, x, y, z);
+			return new GuiEnhancementTable(player.inventory, world, x, y, z);
 		}
 		return null;
 	}

@@ -1,7 +1,13 @@
 package net.timoteo2000.ppem;
 
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.MinecraftForge;
 import net.timoteo2000.ppem.client.gui.GuiEnhancementTable;
 import net.timoteo2000.ppem.client.handler.GuiHandler;
+import net.timoteo2000.ppem.client.handler.ItemEvents;
 import net.timoteo2000.ppem.client.handler.KeyInputEventHandler;
 import net.timoteo2000.ppem.handler.ConfigHandler;
 import net.timoteo2000.ppem.init.ModBlocks;
@@ -10,6 +16,7 @@ import net.timoteo2000.ppem.init.Recipes;
 import net.timoteo2000.ppem.proxy.CommonProxy;
 import net.timoteo2000.ppem.proxy.IProxy;
 import net.timoteo2000.ppem.reference.Reference;
+import net.timoteo2000.ppem.item.ItemEnhancementOrb;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -21,6 +28,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(modid=Reference.MOD_ID,version=Reference.VERSION,guiFactory=Reference.GUI_FACTORY)
 public class PPEMMod {
+	
 	
 	@Mod.Instance
 	public static PPEMMod instance;
@@ -34,22 +42,24 @@ public class PPEMMod {
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event){
-		 ConfigHandler.init(event.getSuggestedConfigurationFile());
-		 FMLCommonHandler.instance().bus().register(new ConfigHandler());
+		ConfigHandler.init(event.getSuggestedConfigurationFile());
+		FMLCommonHandler.instance().bus().register(new ConfigHandler());
+		
 		 
-		 ModItems.init();
+		ModItems.init();
 		 
-		 ModBlocks.init();
+		ModBlocks.init();
 		 
-		 Recipes.init();
+		Recipes.init();
 		 
-		 proxy.registerKeyBindings();
+		proxy.registerKeyBindings();
 	}
 	
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event){
 		FMLCommonHandler.instance().bus().register(new KeyInputEventHandler());
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		MinecraftForge.EVENT_BUS.register(new ItemEvents());
 	}
 	
 	@Mod.EventHandler

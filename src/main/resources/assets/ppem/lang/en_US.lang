@@ -3,9 +3,11 @@
 
 #Item Names
 #item.ppem:item.name=Item Name
+item.ppem:enhancementOrb.name=Enhancement Orb
 
 #Block Names
 #tile.ppem:block.name=Block Name
+tile.ppem:enhancementTable.name=Enhancement Table
 
 #Keys
 #keys.ppem.category=PPEM
