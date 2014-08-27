@@ -9,7 +9,7 @@ public class TileEntityEnhancementTable extends TileEntity{
 
 	public int getSizeInventory() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 2;
 	}
 	
 }

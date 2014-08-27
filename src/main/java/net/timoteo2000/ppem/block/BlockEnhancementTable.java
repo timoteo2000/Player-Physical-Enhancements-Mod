@@ -11,6 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.timoteo2000.ppem.PPEMMod;
 import net.timoteo2000.ppem.client.handler.GuiHandler;
+import net.timoteo2000.ppem.creativetab.CreativeTabPPEM;
 import net.timoteo2000.ppem.proxy.CommonProxy;
 import net.timoteo2000.ppem.reference.Reference;
 import net.timoteo2000.ppem.utils.LogHelper;
@@ -19,6 +20,7 @@ public class BlockEnhancementTable extends BlockContainer {
 	public BlockEnhancementTable(){
 		super(Material.rock);
 		this.setBlockName("enhancementTable");
+		this.setCreativeTab(CreativeTabPPEM.PPEM_TAB);
 	}
 	
 	
