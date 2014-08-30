@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.timoteo2000.ppem.client.handler.IPickupHandler;
 import net.timoteo2000.ppem.init.ModItems;
+import net.timoteo2000.ppem.reference.Reference;
 import net.timoteo2000.ppem.utils.LogHelper;
 import net.timoteo2000.ppem.utils.NBTHelper;
 
@@ -34,7 +35,7 @@ public class ItemEnhancementOrb extends ItemPPEM implements IPickupHandler{
 	 * 3=Knockback Resistance*/
 	public static final int[] enhancements = {0,1,2,3};
 	/*The array of enhancement levels*/
-	public static final int[] levels = {0,1};
+	public static final int[] levels = {0,1,2,3};
 	public final int enhanceId;
 	public final int enhanceLevel;
 	NBTHelper helper = new NBTHelper();
@@ -55,6 +56,10 @@ public class ItemEnhancementOrb extends ItemPPEM implements IPickupHandler{
 		return 0; 
 	}
 	
+	public String getEnhancementUnlocalizedNameById(){
+		return String.format("enhance.%s%s", Reference.MOD_ID.toLowerCase() + ":", helper.getInt(stack, "Enhancement ID"));
+	}
+	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer player){
 		return itemstack;
@@ -72,7 +77,7 @@ public class ItemEnhancementOrb extends ItemPPEM implements IPickupHandler{
 		super.addInformation(stack, player, list, boo);
 		NBTTagList nbtlist = this.nbtlist(stack);
 		if(nbtlist != null){
-			int id = helper.getInt(stack, "Enhancement ID");
+			String id = this.getEnhancementUnlocalizedNameById();
 			int level = helper.getInt(stack, "Enhancement Level");
 			
 			list.add(id + " " + level);
@@ -89,10 +94,19 @@ public class ItemEnhancementOrb extends ItemPPEM implements IPickupHandler{
 	}
 	
 	/*Adds a random enhancement and level to an orb, used when the orb is dropped from a mob.*/
+	/*Still random, but different the different levels are rarer and there are more levels now.*/
+	/*^^ Adding the above later ^^*/
 	public void addRandomEnhancement(ItemStack stack){
 		
 		helper.setInt(stack, "Enhancement ID", rand.nextInt(4));
 		helper.setInt(stack, "Enhancement Level", rand.nextInt(2));
+		/*if(rand.nextInt(2)==1){
+			helper.setInt(stack, "Enhancement Level", 0);
+			LogHelper.info("6666666666666665655");
+		}else if(rand.nextInt(1)==1){
+			helper.setInt(stack, "Enhancement Level", 1);
+			LogHelper.info("777777777777777676");
+		}*/
 		helper.setBoolean(stack, "Written", true);
 	}
 	

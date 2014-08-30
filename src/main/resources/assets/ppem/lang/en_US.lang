@@ -9,5 +9,9 @@ item.ppem:enhancementOrb.name=Enhancement Orb
 #tile.ppem:block.name=Block Name
 tile.ppem:enhancementTable.name=Enhancement Table
 
+#Enhancements
+#enhance.ppem:0.name=Name
+#enhance.ppem:0.name=Attack Damage
+
 #Keys
 #keys.ppem.category=PPEM
