@@ -22,13 +22,11 @@ import net.timoteo2000.ppem.utils.LogHelper;
 public class ItemEvents {
 	
 	private static Item item = new Item();
-	private static ItemStack stack = new ItemStack(item );
+	private static ItemStack stack = new ItemStack(item);
 	private static ItemStack orb = new ItemStack(ModItems.enhancementOrb, 1);
 	private static ItemEnhancementOrb enhancementOrb = new ItemEnhancementOrb();
 	private static World world;
 	private static EntityItem itemEntity;
-	//Work on this later
-	//private static EntityItem orbEntity = new EntityItem(world , 0, 0, 0, orb);
 	private Random rand = new Random();
 	
 	@SubscribeEvent
@@ -39,14 +37,22 @@ public class ItemEvents {
 			event.drops.add(new EntityItem(mob.worldObj, mob.posX, mob.posY, mob.posZ, orb.copy()));
 		}
 	}
-	
-	@SubscribeEvent
+	/*@SubscribeEvent
 	public void onPlayerPickup(EntityItemPickupEvent event){
 		EntityPlayer player = event.entityPlayer;
-		/*if(event.item.isEntityEqual(orbEntity) == true){
-			LogHelper.info("4444444444444444444444444");
+		if(event.item.isEntityEqual(orbEntity) == true){
 			enhancementOrb.addRandomEnhancement(orb);
-		}*/
+		}
+	}*/
+	
+	@SubscribeEvent
+	public void onItemPickup(EntityItemPickupEvent event) {
+		ItemStack stack = event.item.getEntityItem();
+		EntityPlayer player = event.entityPlayer;
+		if(stack != null && stack.getItem() instanceof ItemEnhancementOrb){
+			LogHelper.info("4444444444444444444444444");
+			enhancementOrb.onItemPickup(stack, player);
+		}
 	}
 
 }
