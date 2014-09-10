@@ -11,7 +11,11 @@ tile.ppem:enhancementTable.name=Enhancement Table
 
 #Enhancements
 #enhance.ppem:0.name=Name
-#enhance.ppem:0.name=Attack Damage
+enhance.ppem:0=Attack Damage
+enhance.ppem:1=Movement Speed
+enhance.ppem:2=Health
+enhance.ppem:3=Knockback Resistance
+
 
 #Keys
 #keys.ppem.category=PPEM

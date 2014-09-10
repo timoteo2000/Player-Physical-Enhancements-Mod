@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.timoteo2000.ppem.client.handler.IPickupHandler;
 import net.timoteo2000.ppem.init.ModItems;
@@ -44,20 +45,33 @@ public class ItemEnhancementOrb extends ItemPPEM implements IPickupHandler{
 	Item item = new Item();
 	ItemStack stack = new ItemStack(item);
 	
-	public int getEnhanceId(){
+	public String getEnhanceId(){
 		if(helper.getInt(stack, "Enhancement ID")==0)
-			return 0;
+			return "0";
+		else
 		if(helper.getInt(stack, "Enhancement ID")==1)
-			return 1;
+			return "1";
+		else
 		if(helper.getInt(stack, "Enhancement ID")==2)
-			return 2;
+			return "2";
+		else
 		if(helper.getInt(stack, "Enhancement ID")==3)
-			return 3;
-		return 0; 
+			return "3";
+		else
+		return " "; 
 	}
-	
+	/*Figure out how to make the names work, eventually. For now, just use a global name.*/
 	public String getEnhancementUnlocalizedNameById(){
-		return String.format("enhance.%s%s", Reference.MOD_ID.toLowerCase() + ":", helper.getInt(stack, "Enhancement ID"));
+		if(helper.getInt(stack, "Enhancement ID")==0){
+			return StatCollector.translateToLocal("enhance.ppem:0");
+		}else if(helper.getInt(stack, "Enhancement ID")==1){
+			return StatCollector.translateToLocal("enhance.ppem:1");
+		}else if(helper.getInt(stack, "Enhancement ID")==2){
+			return StatCollector.translateToLocal("enhance.ppem:2");
+		}else if(helper.getInt(stack, "Enhancement ID")==3){
+			return StatCollector.translateToLocal("enhance.ppem:3");
+		}
+		return null;
 	}
 	
 	@Override
